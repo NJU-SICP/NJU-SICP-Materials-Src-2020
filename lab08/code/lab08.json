@@ -1,0 +1,13 @@
+{
+    "name": "lab08",
+    "grader_image": "sicp-lab08-env",
+    "required_files": [
+        {
+            "filename": "expr.py",
+            "container_path": "/usr/src/lab08"
+        }
+    ],
+    "ddl": "2020-12-24 16:10:00",
+    "timeout": 10,
+    "score_extractor": "ok_extractor"
+}

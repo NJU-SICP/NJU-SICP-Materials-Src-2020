@@ -1,0 +1,13 @@
+{
+    "name": "lab09",
+    "grader_image": "sicp-lab09-env",
+    "required_files": [
+        {
+            "filename": "lab09.sql",
+            "container_path": "/usr/src/lab09"
+        }
+    ],
+    "ddl": "2021-01-03 16:10:00",
+    "timeout": 10,
+    "score_extractor": "ok_extractor"
+}

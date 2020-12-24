@@ -1,0 +1,13 @@
+{
+    "name": "lab07",
+    "grader_image": "sicp-lab07-env",
+    "required_files": [
+        {
+            "filename": "lab07.scm",
+            "container_path": "/usr/src/lab07"
+        }
+    ],
+    "ddl": "2020-12-13 16:10:00",
+    "timeout": 15,
+    "score_extractor": "ok_extractor"
+}

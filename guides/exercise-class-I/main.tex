@@ -1,0 +1,601 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{subfigure}
+\usepackage{subfiles}
+\usepackage{url}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{xcolor,colortbl}
+\usepackage{minted}
+\usepackage{svg}
+\usepackage[backend=bibtex,sorting=none]{biblatex}
+\usepackage{multirow}
+
+\addbibresource{reference.bib} 
+
+\definecolor{NJUPurple}{rgb}{0.41568, 0, 0.37255} 
+\colorlet{LightNJUPurple}{white!60!NJUPurple}
+\colorlet{SuperLightNJUPurple}{white!90!NJUPurple}
+
+% \hypersetup{colorlinks,linkcolor=,urlcolor=LightNJUPurple,pdfborderstyle={/S/U/W 1}}
+
+
+\usecolortheme[named=NJUPurple]{structure}
+\setmintedinline{bgcolor={}} 
+%Information to be included in the title page:
+\title{Exercise Class I}
+\author{Shengyi Jiang, Qinlin Chen, Yicheng Huang, \\ Zhiqi Chen \& Zhehao Lin}
+\date{\today}
+
+%Logo in every slide
+\logo{%
+  \makebox[0.98\paperwidth]{
+    \href{https://www.nju.edu.cn}{\includegraphics[height=0.75cm,keepaspectratio]{logos/nju_logo.jpg}}
+    \hfill%
+    \href{https://cs.nju.edu.cn}{\includegraphics[height=1.0cm,keepaspectratio]{logos/njucs_logo.jpg}}%
+  }
+}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercolor{block title}{fg=white,bg=LightNJUPurple}
+\setbeamercolor{block body}{fg=black,bg=SuperLightNJUPurple}
+\setbeamerfont{title}{size=\huge}
+% \setbeamerfont{author}hug
+
+\makeatletter
+\setbeamertemplate{title page}{%
+  \vbox{}
+  \vfill
+  \vskip2cm%<- added
+  \begingroup
+    \centering
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \vfill%<- added
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \vskip-0.2cm%<- changed
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \vfill%<- added
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}%
+    \vskip0.5cm%<- changed
+  \endgroup
+%  \vfill%<- removed
+}
+\makeatother
+
+
+\AtBeginSection[]
+{
+ \begin{frame}
+ \vspace{-5mm}
+\frametitle{Table of Contents}
+  \tableofcontents[
+        currentsection,
+        currentsubsection,
+        subsectionstyle=show/show/hide,
+        sectionstyle=show/shaded
+    ]
+  \end{frame}
+}
+
+
+% shape, colour of item, nested item bullets in itemize only
+\setbeamertemplate{itemize item}[circle] \setbeamercolor{itemize item}{bg=blue}
+\setbeamertemplate{itemize subitem}[circle] \setbeamercolor{itemize subitem}{fg=LightNJUPurple}
+\setbeamertemplate{itemize subsubitem}[triangle] \setbeamercolor{itemize subsubitem}{fg=LightNJUPurple}
+% \setbeamertemplate{itemize/enumerate body begin}{\normalsize}
+% \setbeamertemplate{itemize/enumerate subbody begin}{\normalsize}
+% font size of nested and nested-within-nested bulltes in both itemize and enumerate
+% options are \tiny, \small, \scriptsize, \normalsize, \footnotesize, \large, \Large, \LARGE, \huge and \Huge
+
+
+\setbeamerfont{itemize/enumerate subbody}{size=\scriptsize} 
+\setbeamerfont{itemize/enumerate subsubbody}{size=\scriptsize}
+
+
+\newenvironment{splitframe}[5]
+%[1] ==> 1 parameter passed through {}
+%[2] ==> 2 parameters passed through {}{}
+%[4] ==> 4 parameters passed through {}{}{}{}
+    {
+    \begin{frame}{#3}
+    \begin{columns}
+    \column{#1\linewidth}
+    \centering
+    #4
+    \column{#2\linewidth}
+    \centering
+    #5
+    \end{columns}
+    \centering
+    \vspace{\baselineskip} % adds one line space
+    }
+    %Inside the first pair of braces (ABOVE) is set what your new environment will do before the text within, then inside the second pair of braces (BELOW) declare what your new environment will do after the text. Note second pair can be empty braces too.
+    {
+    \end{frame}
+    }
+
+\begin{document}
+
+\frame{\titlepage}
+
+% no hyperlinks in logos except for titlepage
+\logo{%
+  \makebox[0.98\paperwidth]{
+    \includegraphics[height=0.6cm,keepaspectratio]{logos/nju_logo.jpg}
+    \hfill%
+    \includegraphics[height=0.8cm,keepaspectratio]{logos/njucs_logo.jpg}%
+  }
+}
+
+\begin{frame}
+\frametitle{Table of Contents}
+\vspace{-5mm}
+\tableofcontents[hidesubsections]
+\end{frame}
+
+\section{Lab03-05 Maximum Subsequence}
+\begin{frame}{Lab03-05 Maximum Subsequence}
+
+    \textbf{Problem:} Return the maximum subsequence (not necessarily contiguous) of length at most \texttt{l} (e.g., \texttt{3}) that can be found in the given number \texttt{n} (e.g., \texttt{20125}).
+    
+    \textbf{Thought:} 
+    
+    \begin{enumerate}
+        \item It's hard to swallow it all once, so how can I divide this problem into smaller ones?
+        \item I'm given \texttt{n} and \texttt{l}, where \texttt{n} can repeatedly perform \texttt{n//10} until reaching \texttt{0}, and \texttt{l} may decrease itself to \texttt{0}.
+        \item Well, each time I only consider a bit of \texttt{n}, which has only two choices: in the maximum subsequence or not.
+    \end{enumerate}
+    
+    \textbf{Solution:} For each \texttt{n} and \texttt{l}, we denote the maximum subsequence in this case as \texttt{max\_subseq(n,l)}. \texttt{max\_subseq(n,l)} is the larger one of the following splitted cases.
+    \begin{itemize}
+        \item \texttt{max\_subseq(n//10, l-1)*10 + n\%10}  // the last digit is in \texttt{max\_subseq(n,l)}
+        \item \texttt{max\_subseq(n//10, l)}  // otherwise
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Lab03-05 Maximum Subsequence (cont'd)}
+
+\vspace{-3mm}
+
+    \textbf{Brief proof of solution:} For the convenience of presentation, we denote the number $n$ as $n_1n_2\dots n_k$, where $n_i$ means the $i$-th bit of $n$. We also denote the maximum subsequence of $n_1n_2\dots n_k$ in length at most $l$ as $s(n_1n_2\dots n_k, l)$. For example, when $n_1=2$ and $n_2=3$, $s(n_1n_2, 1)=n_2$.
+    
+    \begin{itemize}
+        \item If $n_k$ is in $s(n_1n_2\dots n_k, l)$, we can conclude that $s(n_1n_2\dots n_{k-1}, l-1)n_k=s(n_1n_2\dots n_k, l)$ since $n_k$ occupies one length. To prove, if we have another different subsequences $tn_k=s(n_1n_2\dots n_k, l)$, we can always replace $t$ by $s(n_1n_2\dots n_{k-1}, l-1)$ because the latter one is the maximum subsequences of $n_1n_2\dots n_{k-1}$ in length at most $l-1$.
+        \item If $n_k$ is not in $s(n_1n_2\dots n_k, l)$, we can conclude that $s(n_1n_2\dots n_{k-1}, l)=s(n_1n_2\dots n_k, l)$. The proof is similar.
+        \item Combining the above two cases, we choose the larger one, which is the globally maximum solution.
+        
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{{Lab03-05 Maximum Subsequence (cont'd)}}
+ 
+ \vspace{-4mm}
+ 
+    \textbf{Example:} The following table shows the calculation procedures of the problem \texttt{max\_subseq(n=20125, l=3)}. The color \textcolor{blue}{blue} represents the base case of recursion, while the color \textcolor{red}{red} represents the original problem.
+    
+    \textbf{Insight:} When splitting problems, from \textcolor{red}{red} to \textcolor{blue}{blue}, each step we jump to the one above or left-above. (\texttt{max(left-above * 10 + now\_last\_digit, above)}). On the contrary, the value calculated flows from \textcolor{blue}{blue} to \textcolor{red}{red}.
+    
+        \begin{table}[]
+            \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            \multicolumn{2}{|c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}value\\flow \end{tabular}}} & \multicolumn{4}{c|}{$l$} \\ \cline{3-6} 
+            \multicolumn{2}{|c|}{} & 0 & 1 & 2 & 3 \\ \hline
+            \multirow{6}{*}{$n$} & 0 & $\downarrow\searrow_*$ & $\downarrow\searrow$ & $\downarrow\searrow$ & $\downarrow$ \\ \cline{2-6} 
+             & 2 & $\downarrow\searrow$ & $\downarrow_*\searrow$ & $\downarrow\searrow$ & $\downarrow$ \\ \cline{2-6} 
+             & 20 & $\searrow$ & $\downarrow_*\searrow$ & $\downarrow\searrow$ & $\downarrow$ \\ \cline{2-6} 
+             & 201 & & $\searrow_*$ & $\downarrow\searrow$ & $\downarrow$ \\ \cline{2-6} 
+             & 2012 & & & $\searrow_*$ & $\downarrow$ \\ \cline{2-6} 
+             & 20125 & & & & \textbf{\textcolor{red}{goal}} \\ \hline
+            \end{tabular}
+        \quad
+            \begin{tabular}{|c|c|c|c|c|c|}
+            \hline
+            \multicolumn{2}{|c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}max\_subseq\\ ($n$, $l$)\end{tabular}}} & \multicolumn{4}{c|}{$l$} \\ \cline{3-6} 
+            \multicolumn{2}{|c|}{} & 0 & 1 & 2 & 3 \\ \hline
+            \multirow{6}{*}{$n$} & 0 & \textbf{\textcolor{blue}{0}} & 0 & 0 & 0 \\ \cline{2-6} 
+             & 2 & 0 & \textbf{2} & 2 & 2 \\ \cline{2-6} 
+             & 20 & 0 & \textbf{2} & 20 & 20 \\ \cline{2-6} 
+             & 201 & 0 & \textbf{2} & 21 & 201 \\ \cline{2-6} 
+             & 2012 & 0 & 2 & \textbf{22} & 212 \\ \cline{2-6} 
+             & 20125 & 0 & 5 & 25 & \textbf{\textcolor{red}{225}} \\ \hline
+            \end{tabular}
+        \end{table}
+    
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{{Lab03-05 Maximum Subsequence (cont'd)}}
+
+\textbf{Code Sample:}
+\begin{minted}{python}
+def max_subseq(n, l):
+    if l == 0 or n == 0:
+        return 0
+    case1 = max_subseq(n // 10, l - 1) * 10 + n % 10
+    case2 = max_subseq(n // 10, l)
+    return max(case1, case2)
+\end{minted}
+    
+\end{frame}
+
+\section{HW03-02 Ping-pong}
+\begin{frame}{HW03-02 Ping-pong}
+
+    \textbf{Key points:}
+    
+    \begin{itemize}
+        \item The ping-pong value is locally monotonous (e.g., it decreases from \texttt{7} to \texttt{0} when the index increases from \texttt{7} to \texttt{14}). $\to$ \textbf{A locally monotonous variable recording current value.}
+        \item The ping-pong value sometimes (when the index $k$ is a multiple of \texttt{7} or contains the digit \texttt{7}) changes its monotonicity. $\to$ \textbf{A variable recording the direction/monotonicity.}
+        \item In a tail recursion manner, it performs well.
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{{HW03-02 Ping-pong (cont'd)}}
+
+\textbf{Code Sample:} \texttt{cur\_val} records the current value, and \texttt{direc} records the current direction (\texttt{+1} or \texttt{-1}). \texttt{-direc} means changing direction.
+\begin{minted}{python}
+def pingpong(n):
+    def state(cur_index, target, cur_val, direc):
+        if cur_index == target:
+            return cur_val
+        if cur_index % 7 == 0 or num_sevens(cur_index) > 0:
+            return state(cur_index + 1, target, cur_val - direc, -direc)
+        return state(cur_index + 1, target, cur_val + direc, direc)
+    return state(1, n, 1, 1)
+\end{minted}
+
+\end{frame}
+
+\section{HW03-03 Count Change}
+
+\begin{frame}[fragile]
+\frametitle{{HW03-03 Count Change}}
+    
+\textbf{Problem:} Once the machines take over, the denomination of every coin will be a power of two: 1-cent, 2-cent, 4-cent, 8-cent, 16-cent, etc. \textit{There will be no limit to how much a coin can be worth.} Given a positive integer \texttt{total}, a set of coins makes change for \texttt{total} if the sum of the values of the coins is \texttt{total}. Write a recursive function \texttt{count\_change} that takes a positive integer \texttt{total} and returns \textbf{the number of ways} to make change for \texttt{total} using these coins of the future.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{{HW03-03 Count Change (cont'd)}}
+    
+\textbf{Thought:} What do we have? (1) Unlimited kinds of coins with increasing denominations; (2) The goal of summation of coins, \textit{total}. The lower bound of (1) is known (i.e., 1-cent), while the upper bound of (2) is also known (i.e., \textit{total}). So it's not hard to figure out that you should try to use coins with increasing denominations in order, while $\texttt{goal}$ is decreasing when using coins. The rest is similar to the problem ``Maximum Subsequence'' talked above.
+
+\textbf{Solution:} Regarding to 1-cent denomination, we have two choices: use a coin with this denomination or simply not use this denomination. If we use it, we can decrease our \texttt{total} by 1 and can further decide whether to use 1-cent denomination; If we do not use it, our \texttt{total} is unchanged and we can only use coins with denominations larger than 1 (at least 2-coin) later. The same is true for $i$-coin. The number of ways is the addition of that of these two choices.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{{HW03-03 Count Change (cont'd)}}
+
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\textbf{Solution (cont'd):} Denote \texttt{rec\_count(min\_coin,sub\_total)} as the number of ways to make change for \texttt{sub\_total} using coins with denominations \texttt{min\_coin}-cent, \texttt{2*min\_coin}-cent, etc.
+\begin{center}
+
+\texttt{rec\_count(min\_coin, sub\_total)}
+
+\texttt{= rec\_count(min\_coin*2, sub\_total)}
+
+\texttt{+ rec\_count(min\_coin, sub\_total-min\_coin)}
+\end{center}
+
+\textbf{Base Case:} 
+\begin{itemize}
+    \item \texttt{sub\_total == 0} \\ $\to$ return 1 (exactly match)
+    \item \texttt{sub\_total < min\_coin} \\ $\to$ return 0 (no more enough)
+\end{itemize}
+
+\end{column}
+
+\begin{column}{0.4\textwidth}  
+\textbf{Example:} When we make changes for 7:
+
+\begin{table}[]
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\multicolumn{2}{|c|}{\multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}$rec\_count$\end{tabular}}} & \multicolumn{4}{c|}{$min\_coin$} \\ \cline{3-6} 
+\multicolumn{2}{|c|}{} & 8 & 4 & 2 & 1 \\ \hline
+\multirow{8}{*}{$sub\_total$} & 0 & 1 & 1 & 1 & 1 \\ \cline{2-6} 
+ & 1 & 0 & 0 & 0 & 1 \\ \cline{2-6} 
+ & 2 & 0 & 0 & 1 & 2 \\ \cline{2-6} 
+ & 3 & 0 & 0 & 0 & 2 \\ \cline{2-6} 
+ & 4 & 0 & 1 & 1 & 4 \\ \cline{2-6} 
+ & 5 & 0 & 0 & 0 & 4 \\ \cline{2-6} 
+ & 6 & 0 & 0 & 2 & 6 \\ \cline{2-6} 
+ & 7 & 0 & 0 & 0 & \textbf{\textcolor{red}{6}} \\ \hline
+\end{tabular}
+\end{table}
+\end{column}
+\end{columns}
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{{HW03-03 Count Change (cont'd)}}
+    
+\textbf{Code Sample:} 
+\begin{minted}{python}
+def count_change(total):
+    def rec_count(min_coin, sub_total):
+        if sub_total == 0:
+            return 1
+        if sub_total < min_coin:
+            return 0
+        min_coin_used = rec_count(min_coin, sub_total - min_coin)
+        min_coin_unused = rec_count(min_coin * 2, sub_total)
+        return min_coin_used + min_coin_unused
+    return rec_count(1, total)
+\end{minted}
+    
+\end{frame}
+
+\section{HW02-04 Make Repeater}
+\begin{frame}{HW02-04 Make Repeater}
+
+\textbf{Problem:} Implement the function \mintinline{text}{make_repeater} so that \mintinline{text}{make_repeater(h, n)(x)} returns \mintinline{text}{h(h(...h(x)...))}, where h is applied n times.
+
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{{HW02-04 Make Repeater (cont'd)}}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Solution:} It's easy to define a function that computes the value of $h^{(n)}(x)$. So just define a helper function (that computes the value of $h^{(n)}(x)$) and returns it.
+\end{column}
+
+\begin{column}{0.5\textwidth}  
+\begin{minted}{python}
+def make_repeater(h, n):
+    def repeater(x):
+        i = 0
+        while i < n:
+            x = h(x)
+            i += 1
+        return x
+    return repeater
+\end{minted}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{HW02-04 Make Repeater (cont'd)}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Solution:} 
+\small{
+A recursive thinking:
+\begin{itemize}
+    \item $n=1$, return h ($n=0$, return \mintinline{text}{identity})
+    \item $n=k$, we have $h^{(k-1)} $\mintinline{text}{=make_repeater(h,n-1)} $\Rightarrow$ \\ $h^{(k)}$=\mintinline{text}{compose(h,make_repeater(h,n-1))}
+\end{itemize}
+}
+\end{column}
+
+\begin{column}{0.5\textwidth}  
+\begin{minted}{python}
+def make_repeater(h, n):
+    if n == 1: 
+        return h
+    else:
+        return compose(h, 
+            make_repeater(h, n-1))
+\end{minted}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{HW02-04 Make Repeater (cont'd)}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\textbf{Solution:} compose is an operator defined on function space $\mathcal{F}\times\mathcal{F}$. Especially, when two operands are $f$ and power of $f$, compose is commutable. There is a homomorphism between $(f, compose)$ and $(\mathbb{N}^+, +)$. Recall that we have defined \mintinline{text}{accumulate} to abstract similar operations on int, so... 
+\end{column}
+
+\begin{column}{0.5\textwidth}  
+\begin{minted}{python}
+def make_repeater(h, n):
+    return accumulate(compose, 
+      identity, n, lambda i: h)
+\end{minted}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\section{HW03-04 Missing Digits}
+\begin{frame}[fragile]
+\frametitle{HW03-04 Missing Digits}
+\textbf{Problem:} Write the recursive function \mintinline{text}{missing_digits} that takes a number n that is sorted in non-decreasing order. It returns the number of missing digits in n. A missing digit is a number between the first and last digit of n of a that is not in n.
+
+\end{frame} 
+
+\begin{frame}[fragile]
+\frametitle{HW03-04 Missing Digits (cont'd)}
+
+\begin{columns}
+\begin{column}{0.4\textwidth}
+\textbf{Solution:} 
+The number is sorted in non-descreasing order. We can track the value of current digit $d$.
+\begin{itemize}
+    \item base case: $n < 10$, return 0
+    \item $n, d$, compute \mintinline{text}{next_d} and compute \mintinline{text}{f(n//10, next_d)}.
+\end{itemize}
+
+Be careful with same digits.
+
+\end{column}
+
+\begin{column}{0.6\textwidth}  
+\begin{minted}{python}
+def missing_digits(n):
+    def helper(n, current_digit):
+        if n < 10:
+            return 0
+        next_digit = (n // 10) % 10
+        return max(current_digit - \
+        next_digit - 1, 0) + \
+        helper(n//10, next_digit)
+    return helper(n, n % 10)
+\end{minted}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{HW03-04 Missing Digits (cont'd)}
+
+You can find that \mintinline{text}{next_d} is equal to the last digit of n. So we do not have to exlicitly track it.
+\begin{minted}{python}
+def missing_digits(n):
+    if n < 10:
+        return 0
+    right_first_digit = n % 10
+    right_second_digit = (n // 10) % 10
+    if right_second_digit < right_first_digit:
+        return missing_digits(n // 10) + \
+        (right_first_digit - right_second_digit) - 1
+    return missing_digits(n // 10)
+\end{minted}
+\end{frame}
+
+\section{Lab02-04 I Heard You Liked Functions}
+\begin{frame}
+\frametitle{Lab02-04 I Heard You Liked Functions}
+
+\vspace{-5mm}
+
+Define a function cycle that takes in three functions f1, f2, f3, as arguments. cycle will return another function that should take in an integer argument n and return another function. That final function should take in an argument x and cycle through applying f1, f2, and f3 to x, depending on what n was.
+
+\begin{itemize}
+    \item n = 0, return x
+    \item n = 1, apply f1 to x, or return f1(x)
+    \item n = 2, apply f1 to x, and then f2 to the result of that, or return f2(f1(x))
+    \item n = 3, apply f1 to x, f2 to the result of applying f1, and then f3 to the result of applying f2, or f3(f2(f1(x)))
+    \item n = 4, start the cycle again applying f1, then f2, then f3, then f1 again, or f1(f3(f2(f1(x))))
+
+\end{itemize}
+And so forth.
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Lab02-04 I Heard You Liked Functions (cont'd)}
+
+\textbf{Solution:} We have \mintinline{text}{f1, f2, f3}: ${\rm T \to T}$, we need a function ${\rm cycle}: ({\rm T\to T, T\to T, T\to T)} \to (n:{\rm int} \to x:{\rm T} \to y: {\rm T})$. First, define the inner-most function $g$ that computes the value given \mintinline{text}{x} and \mintinline{text}{n}. Second, define function f that take n that returns \mintinline{text}{g(x, n)}. Last, return \mintinline{text}{f}.
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Lab02-04 I Heard You Liked Functions (cont'd)}
+
+\vspace{-5mm}
+
+\scriptsize{
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{minted}{python}
+T = TypeVar('T')
+
+def g(x: T, n: int, f1: Callable[[T], T], 
+      f2:Callable[[T], T], f3:Callable[[T], T]):
+      res, i = x, 1
+      while i <= n:
+        if i % 3 == 1:
+          res = f1(res)
+        elif i % 3 == 2:
+          res = f2(res)
+        else:
+          res = f3(res)
+        i += 1
+      return res
+def f(n: int, f1: Callable[[T], T], 
+      f2: Callable[[T], T], f3: Callable[[T], T]):
+    return lambda x: g(x, n, f1, f2, f3)
+def cycle(f1: Callable[[T], T], 
+          f2: Callable[[T], T], f3: Callable[[T], T]):
+  return lambda n: f(n, f1, f2, f3)
+  
+\end{minted}
+
+\end{column}
+
+\begin{column}{0.5\textwidth}  
+\begin{minted}{python}
+def cycle(f1, f2, f3):
+    def f(n):
+        def g(x):
+            res, i = x, 1
+            while i <= n:
+                if i % 3 == 1:
+                    res = f1(res)
+                elif i % 3 == 2:
+                    res = f2(res)
+                else:
+                    res = f3(res)
+                i += 1
+            return res
+        return g
+    return f
+\end{minted}
+
+\end{column}
+\end{columns}
+}
+\end{frame}
+
+\logo{%
+  \makebox[0.98\paperwidth]{
+    \href{https://www.nju.edu.cn}{\includegraphics[height=0.75cm,keepaspectratio]{logos/nju_logo.jpg}}
+    \hfill%
+    \href{https://cs.nju.edu.cn}{\includegraphics[height=1.0cm,keepaspectratio]{logos/njucs_logo.jpg}}%
+  }
+} 
+
+\begin{frame}
+
+\begin{center}
+\Huge Q \& A
+\end{center}
+    
+\end{frame}
+
+\end{document}
+
+\end{document}

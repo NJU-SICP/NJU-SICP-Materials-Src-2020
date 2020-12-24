@@ -1,0 +1,21 @@
+{
+    "name": "project4",
+    "grader_image": "sicp-project4-env",
+    "required_files": [
+        {
+            "filename": "scheme.py",
+            "container_path": "/usr/src/project4"
+        },
+        {
+            "filename": "scheme_reader.py",
+            "container_path": "/usr/src/project4"
+        },
+        {
+            "filename": "questions.scm",
+            "container_path": "/usr/src/project4"
+        }
+    ],
+    "ddl": "2020-12-31 16:10:00",
+    "timeout": 15,
+    "score_extractor": "ok_extractor"
+}

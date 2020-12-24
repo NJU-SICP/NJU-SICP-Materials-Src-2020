@@ -1,0 +1,14 @@
+.vscode
+*.DS_Store
+__pycache__
+
+*.pdf
+lab*.html
+hw*.html
+project*.html
+*.zip
+*.rar
+*sol.py
+*sol.scm
+
+.ok_history

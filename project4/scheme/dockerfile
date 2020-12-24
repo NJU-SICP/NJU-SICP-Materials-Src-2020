@@ -1,0 +1,7 @@
+FROM python:3.7
+
+WORKDIR /usr/src/project4
+
+COPY . .
+
+CMD ["python", "ok", "--local", "--score", "--timeout", "3"]

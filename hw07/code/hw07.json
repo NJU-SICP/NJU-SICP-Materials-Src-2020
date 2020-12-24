@@ -1,0 +1,13 @@
+{
+    "name": "hw07",
+    "grader_image": "sicp-hw07-env",
+    "required_files": [
+        {
+            "filename": "hw07.scm",
+            "container_path": "/usr/src/hw07"
+        }
+    ],
+    "ddl": "2020-12-17 16:10:00",
+    "timeout": 8,
+    "score_extractor": "ok_extractor"
+}
