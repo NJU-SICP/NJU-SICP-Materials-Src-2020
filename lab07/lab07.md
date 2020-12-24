@@ -22,7 +22,7 @@ If everything goes well, you will see some assignments and their corresponding d
 
 Wait! But how to submit my assignment? We have provide you a python script named `submit.py` to submit your assignment, which can be found in the root directory of our lab materials. Let me show you its usage.
 
-If you want to submit your answers, first open your terminal and make sure your current working directory is somewhere the `lab07.scm` and `submit.py` is located by the `cd` command. It should be the `code/` directory if you haven't move or rename any files and directories since you unzipped `lab07.zip`. 
+If you want to submit your answers, first open your terminal and make sure your current working directory is somewhere the `lab07.scm` and `submit.py` is located by the `cd` command. It should be the `code/` directory if you haven't move or rename any files and directories since you unzipped `lab07.zip`.
 
 > If you don't know how to use `cd`, let us known. We will help you.
 
@@ -54,7 +54,7 @@ pip install requests
 
 If you cannot see the success information returned by `pip` or information like `Requirement already satisfied: xxx`, the installation failed, and you can contact the TAs.
 
-Now, enter the following command in the terminal to submit your answers to our Grader server and get them scored. 
+Now, enter the following command in the terminal to submit your answers to our Grader server and get them scored.
 
 ```
 python submit.py --stuid <YOUR STUDENT ID> --stuname <YOUR NAME>
@@ -95,7 +95,7 @@ Cannot backup when running ok with --local.
 
 If you have any technical problems with submission, please contact TAs.
 
-> **WARNING:** Do not modify `submit.py`! 
+> **WARNING:** Do not modify `submit.py`!
 
 
 ## 2. Topics

@@ -186,7 +186,7 @@ You can review the syntax of `if` statements in [Section 1.5.4](http://composing
 > else:
 >     return False
 > ```
-> 
+>
 > This can be written more concisely as `return x > 3`. If your code looks like the code above, see if you can rewrite it more clearly!
 
 #### 2.2.4 While Loops
@@ -431,7 +431,7 @@ Write a function that takes three integers (may be nonpositive) and returns `1` 
 ```python
 def is_triangle(a, b, c):
     """Given three integers (may be nonpositive), judge whether the three
-    integers can form the three sides of a triangle. If yes, return 1, 
+    integers can form the three sides of a triangle. If yes, return 1,
     otherwise return 0.
 
     >>> is_triangle(2, 1, 3)

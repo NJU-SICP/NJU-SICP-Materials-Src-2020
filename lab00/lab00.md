@@ -141,9 +141,9 @@
 - **Linux系统**：在桌面或文件夹界面右击，在下拉框中选择“Open in terminal”，就能打开终端。也可以利用快捷键`Ctrl + Alt + T`打开。
 
 > 到底什么是“终端”？终端本质上就是一个“显示器”——它只有显示的功能。然而，当你打开终端后，你会在终端上看到一些字符，并且敲击键盘会在终端上显示你敲击的字符。实际上，这是由一个叫“cmd.exe”的程序完成的（在Windows平台上是这样的。在Linux和macOS上对应的程序叫Shell）。cmd.exe是你最贴心的电脑管家。你可以通过输入“命令”来让它帮你在电脑上执行程序，并把结果输出到终端上。马上我们就知道如何让它执行一些命令了。
-> 
+>
 > 有的人可能想知道，为什么大家看到的终端是这样黑漆漆的一片、只显示了一些看起来很枯燥的文本呢？因为古早的电脑就是这样的。就像下面图片里这样。古早的电脑的显示器就是终端，又因为显示器没有像现代发达的图形显示能力，所以只能用最简单的方法显示信息——黑漆漆的背景、像素风格的文字。而当拥有图形界面的操作系统（如Windows）开始流行后，显示器被好看的图形界面了占用了，终端需要靠软件模拟才能打开。又因为前面所说的历史因素，模拟出来的终端就保持了这样有点丑的“小黑框”风格。
-> 
+>
 > ![terminal](images/terminal.jpg)
 >
 > 未来我们提及终端的时候，更多指的是终端的那个“小黑框”外加上cmd.exe（或Shell）这个程序所组成的整体。如果现在大家不是那么明白也没关系，只要知道如何打开终端即可。
@@ -203,7 +203,7 @@
 
     $ python --version
     Python 3.7.1
-    
+
     $
 
 **需要注意的是，为了减少视觉负担，我们还使用了“`$`”这一简短的符号来代替原本图片中一长串的提示符。未来大家会在网络上看到更多这样的表达。**
@@ -442,16 +442,16 @@ True
     C:\SICP\lab00\code>dir
      驱动器 C 中的卷是 Windows
      卷的序列号是 4C0F-CDB0
-    
+
      C:\SICP\lab00\code 的目录
-    
+
     2020/09/21  10:37    <DIR>          .
     2020/09/21  10:37    <DIR>          ..
     2020/09/21  15:03                19 hello.py
     2020/09/19  17:48               480 lab00.py
                 2 个文件            499 字节
                 3 个目录 100,005,732,352 可用字节
-    
+
     C:\SICP\lab00\code>
 
 在Linux下：
@@ -570,7 +570,7 @@ VSCode有一个“打开目录”的概念。比如，一个项目可能由多�
     def twenty_twenty():
         """Come up with the most creative expression that evaluates to 2020,
         using only numbers and the +, *, and - operators.
-    
+
         >>> twenty_twenty()
         2020
         """
@@ -598,7 +598,7 @@ VSCode有一个“打开目录”的概念。比如，一个项目可能由多�
     def twenty_twenty():
         """Come up with the most creative expression that evaluates to 2020,
         using only numbers and the +, *, and - operators.
-    
+
         >>> twenty_twenty()
         2020
         """
@@ -637,7 +637,7 @@ VSCode有一个“打开目录”的概念。比如，一个项目可能由多�
 
     def add(a, b):
         """return the sum of a and b
-    
+
         >>> add(1, 2)
         3
         """
@@ -647,7 +647,7 @@ VSCode有一个“打开目录”的概念。比如，一个项目可能由多�
 
     def add(a, b):
         """return the sum of a and b
-    
+
         >>> add(1, 2)
         3
         >>> add(3, 4)

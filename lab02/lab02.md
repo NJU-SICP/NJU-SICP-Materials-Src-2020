@@ -33,7 +33,7 @@ While both `lambda` expressions and `def` statements create function objects, th
 | Type | *Expression* that evaluates to a value | *Statement* that alters the environment |
 | Result of execution | Creates an anonymous lambda function with no intrinsic name. | Creates a function with an intrinsic name and binds it to that name in the current environment. |
 | Effect on the environment | Evaluating a `lambda` expression does *not* create or modify any variables. | Executing a `def` statement both creates a new function object *and* binds it to a name in the current environment. |
-| Usage | A `lambda` expression can be used anywhere that expects an expression, such as in an assignment statement or as the operator or operand to a call expression. | After executing a `def` statement, the created function is bound to a name. You should use this name to refer to the function anywhere that expects an expression. | 
+| Usage | A `lambda` expression can be used anywhere that expects an expression, such as in an assignment statement or as the operator or operand to a call expression. | After executing a `def` statement, the created function is bound to a name. You should use this name to refer to the function anywhere that expects an expression. |
 
 - **lambda** example
 
@@ -50,7 +50,7 @@ square(3)
 # Lambda expressions can be used as an operator
 # or operand
 negate = lambda f, x: -f(x)
-negate(lambda x: x * x, 3) 
+negate(lambda x: x * x, 3)
 ```
 
 - **def** example
@@ -61,7 +61,7 @@ def square(x):
 
 # A function created by a def statement
 # can be referred to by its intrinsic name
-square(3)   
+square(3)
 ```
 
 ### 2.2 Environment Diagrams

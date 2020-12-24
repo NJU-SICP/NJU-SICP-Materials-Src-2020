@@ -109,7 +109,7 @@ _______
 4
 ```
 
-> Recall that you can use `python -i <file.py>` to start a Python interpreter that executes all statements in `<file.py>` and then enter the interactive mode where you can write call expressions to run the functions defined in `<file.py>`. 
+> Recall that you can use `python -i <file.py>` to start a Python interpreter that executes all statements in `<file.py>` and then enter the interactive mode where you can write call expressions to run the functions defined in `<file.py>`.
 
 ### Problem 1 (200 pt)
 Implement the `roll_dice` function in `hog.py`. It takes two arguments: a positive integer called `num_rolls` giving the number of dice to roll and a `dice` function. It returns the number of points scored by rolling the dice that number of times in a turn: either the sum of the outcomes or 1 (*Pig Out*).

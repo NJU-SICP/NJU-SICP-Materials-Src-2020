@@ -34,7 +34,7 @@ project4
 
 > See lab07 for more instructions on on submitting assignments.
 
-> **WARNING:** Do not modify `submit.py`! 
+> **WARNING:** Do not modify `submit.py`!
 
 >CS 61A has also provided a [language specification](https://inst.eecs.berkeley.edu/~cs61a/sp20/articles/scheme-spec.html) and [built-in procedure reference](https://inst.eecs.berkeley.edu/~cs61a/sp20/articles/scheme-builtins.html) for the CS 61A subset of Scheme that you'll be building in this project. Reading the entirety of either of these documents should not be necessary, but we'll point out useful sections from the documentation in each part of the project.
 
@@ -155,7 +155,7 @@ The first part of this project deals with reading and parsing user input. Our re
 | ----- | ----- | ----- |
 |`scm> 1` | Numbers | Python's built-in `int` and `float` values |
 | `scm> x` | Symbols | Python's built-in `string` values |
-| `scm> #t` | Booleans (`#t`, `#f`) | Python's built-in `True`, `False` values | 
+| `scm> #t` | Booleans (`#t`, `#f`) | Python's built-in `True`, `False` values |
 | `scm> (+ 2 3)` | Combinations | Instances of the `Pair` class, defined in `scheme_reader.py` |
 | `scm> nil` | `nil` | The `nil` object, defined in `scheme_reader.py` |
 

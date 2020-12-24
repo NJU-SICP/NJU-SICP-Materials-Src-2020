@@ -311,7 +311,7 @@ def make_adder_inc(n):
     """
     >>> adder1 = make_adder_inc(5)
     >>> adder2 = make_adder_inc(6)
-    >>> adder1(2) 
+    >>> adder1(2)
     7
     >>> adder1(2) # 5 + 2 + 1
     8

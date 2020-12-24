@@ -126,7 +126,7 @@ Applying an aggregation function to an input relation results in a single row co
 3.0
 ```
 
-But oftentimes, we'd like to condition the groups and compute aggregate results for smaller portions of the input relation. We can use `GROUP BY` and `HAVING` to split the rows into groups and select only a subset of the groups. 
+But oftentimes, we'd like to condition the groups and compute aggregate results for smaller portions of the input relation. We can use `GROUP BY` and `HAVING` to split the rows into groups and select only a subset of the groups.
 
 ```
 output_table = []
@@ -270,7 +270,7 @@ Did you take SICP with the hope of finding your soul mate? Well you're in luck (
 In order to match up students, you will have to do a join on the `students` table with itself. When you do a join, SQLite will match every single row with every single other row, so make sure you do not match anyone with themselves, or match any given pair twice!
 
 > **Important Note:** When pairing the first and second person, make sure that the first person responded first (i.e. they have an earlier `time`). This is to ensure your output matches our tests.
-> 
+>
 > *Hint:* When joining table names where column names are the same, use dot notation to distinguish which columns are from which table: `[table_name].[column name]`. This sometimes may get verbose, so it’s stylistically better to give tables an alias using the `AS` keyword. The syntax for this is as follows:
 >
 > ```SQL
